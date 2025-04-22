@@ -1,3 +1,4 @@
+import 'package:_20220140201_act4/DetailOrder.dart';
 import 'package:flutter/material.dart';
 
 class OrderPage extends StatefulWidget {
@@ -77,7 +78,12 @@ class _OrderPageState extends State<OrderPage> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   calculateTotalPrice();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailOrderPage(
+                    makanan: makananController.text, 
+                    minuman: minumanController.text, 
+                    jumlahMakanan: jumlahMakananController.text, 
+                    jumlahMinuman: jumlahMinumanController.text, 
+                    totalHarga: totalHarga)),);
                 }
               },
               child: Text('Order Now'),

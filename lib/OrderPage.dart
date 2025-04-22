@@ -19,12 +19,72 @@ class _OrderPageState extends State<OrderPage> {
     int jumlahMinuman = int.tryParse(jumlahMinumanController.text) ?? 0;
 
     setState(() {
-      totalHarga = (jumlahMakanan * 32000) + (jumlahMakanan * 50000);
+      totalHarga = (jumlahMakanan * 32000) + (jumlahMinuman * 50000);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final _formKey = GlobalKey<FormState>();
+    return Scaffold(
+      appBar: AppBar(title: Text('Order Page')),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          spacing: 16,
+          children: [
+            TextFormField(
+              controller: makananController,
+              decoration: const InputDecoration(labelText: 'Food Order'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter yout food order';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: minumanController,
+              decoration: const InputDecoration(labelText: 'drink Order'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter yout drink order';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: jumlahMakananController,
+              decoration: const InputDecoration(labelText: 'Food QTY Order'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your qty of food order';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: jumlahMinumanController,
+              decoration: const InputDecoration(labelText: 'Drink QTY Order'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your qty of drink order';
+                }
+                return null;
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  calculateTotalPrice();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ),);
+                }
+              },
+              child: Text('Order Now'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
